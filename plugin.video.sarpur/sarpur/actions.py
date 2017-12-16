@@ -208,13 +208,22 @@ def podcast_show(url, name):
                            extra_info=recording)
 
 
+
+
 def search():
     query = INTERFACE.keyboard(u"Leita að efni")
+    
     if not query:
         index()
+        logger.log('No query!')
     else:
         for show in scraper.search(query):
-            INTERFACE.add_item(show['name'],
+            logger.log("%s" % (show))
+
+            title = '%s %s' % (show['name'],
+                               show['Premiered'])
+
+            INTERFACE.add_item(title,
                                'play_url',
                                show['url'],
                                image=show['img'],
