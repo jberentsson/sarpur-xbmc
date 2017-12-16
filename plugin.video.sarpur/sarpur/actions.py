@@ -208,17 +208,15 @@ def podcast_show(url, name):
                            extra_info=recording)
 
 
-
-
 def search():
     query = INTERFACE.keyboard(u"Leita a√∞ efni")
-    
-    if not query:
+    shows = scraper.search(query)
+    if not shows:
+        INTERFACE.info_box(u'Villa!', 'Ekkert fannst vi√ leit!!!')
         index()
-        logger.log('No query!')
     else:
-        for show in scraper.search(query):
-            logger.log("%s" % (show))
+        for show in shows:
+            #logger.log("%s" % (show))
 
             title = '%s %s' % (show['name'],
                                show['Premiered'])
